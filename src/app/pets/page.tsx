@@ -2,104 +2,11 @@
 
 import React, { useState } from 'react';
 import { PetCard, PetFilters, Pagination } from '@/components/pets';
+import { allPets } from '@/data/pets';
 
 const PetsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
-
-  const allPets = [
-    {
-      name: 'Cooper',
-      age: '2 Years',
-      breed: 'Golden Retriever',
-      imageUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Luna',
-      age: '4 Years',
-      breed: 'Domestic Shorthair',
-      imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Oliver',
-      age: '1 Year',
-      breed: 'Terrier Mix',
-      imageUrl: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Duke',
-      age: '8 Years',
-      breed: 'Yellow Lab',
-      imageUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Milo',
-      age: '4 Months',
-      breed: 'Tabby Kitten',
-      imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Bella',
-      age: '3 Years',
-      breed: 'Border Collie',
-      imageUrl: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Buster & Pip',
-      age: '3 Months',
-      breed: 'Beagle Mix',
-      imageUrl: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Cleo',
-      age: '5 Years',
-      breed: 'Siamese',
-      imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Shalow',
-      age: '8 Years',
-      breed: 'Yellow Lab',
-      imageUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Miko',
-      age: '4 Months',
-      breed: 'Tabby Kitten',
-      imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Ana',
-      age: '3 Years',
-      breed: 'Border Collie',
-      imageUrl: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Buster',
-      age: '3 Months',
-      breed: 'Beagle Mix',
-      imageUrl: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    },
-    {
-      name: 'Soro',
-      age: '5 Years',
-      breed: 'Siamese',
-      imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
-      tags: [{ label: 'Available', color: 'green' as const }],
-    }
-  ];
 
   const totalCount = allPets.length;
   const startIndex = (currentPage - 1) * itemsPerPage;
