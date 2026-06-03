@@ -1,15 +1,34 @@
 export type PetTagColor = 'green' | 'blue' | 'orange' | 'gray';
+export type PetSpecies = 'Dog' | 'Cat';
+export type AgeGroup = 'puppy-kitten' | 'young' | 'adult' | 'senior';
 
 export interface PetTag {
   label: string;
   color: PetTagColor;
 }
 
+export interface PetFiltersState {
+  search: string;
+  species: '' | PetSpecies;
+  ageGroup: '' | AgeGroup;
+  gender: '' | 'Male' | 'Female';
+  breed: string;
+}
+
+export const defaultPetFilters: PetFiltersState = {
+  search: '',
+  species: '',
+  ageGroup: '',
+  gender: '',
+  breed: '',
+};
+
 export interface PetProfile {
   slug: string;
   name: string;
   age: string;
   breed: string;
+  species: PetSpecies;
   gender: 'Male' | 'Female';
   imageUrl: string;
   gallery?: string[];
@@ -25,6 +44,7 @@ export const allPets: PetProfile[] = [
     name: 'Cooper',
     age: '2 Years',
     breed: 'Golden Retriever',
+    species: 'Dog',
     gender: 'Male',
     imageUrl:
       'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1000&auto=format&fit=crop',
@@ -50,6 +70,7 @@ export const allPets: PetProfile[] = [
     name: 'Luna',
     age: '4 Years',
     breed: 'Domestic Shorthair',
+    species: 'Cat',
     gender: 'Female',
     imageUrl:
       'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
@@ -65,6 +86,7 @@ export const allPets: PetProfile[] = [
     name: 'Oliver',
     age: '1 Year',
     breed: 'Terrier Mix',
+    species: 'Dog',
     gender: 'Male',
     imageUrl:
       'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1000&auto=format&fit=crop',
@@ -80,6 +102,7 @@ export const allPets: PetProfile[] = [
     name: 'Duke',
     age: '8 Years',
     breed: 'Yellow Lab',
+    species: 'Dog',
     gender: 'Male',
     imageUrl:
       'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1000&auto=format&fit=crop',
@@ -95,6 +118,7 @@ export const allPets: PetProfile[] = [
     name: 'Milo',
     age: '4 Months',
     breed: 'Tabby Kitten',
+    species: 'Cat',
     gender: 'Male',
     imageUrl:
       'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
@@ -110,6 +134,7 @@ export const allPets: PetProfile[] = [
     name: 'Bella',
     age: '3 Years',
     breed: 'Border Collie',
+    species: 'Dog',
     gender: 'Female',
     imageUrl:
       'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=1000&auto=format&fit=crop',
@@ -125,6 +150,7 @@ export const allPets: PetProfile[] = [
     name: 'Buster & Pip',
     age: '3 Months',
     breed: 'Beagle Mix',
+    species: 'Dog',
     gender: 'Male',
     imageUrl:
       'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1000&auto=format&fit=crop',
@@ -140,6 +166,7 @@ export const allPets: PetProfile[] = [
     name: 'Cleo',
     age: '5 Years',
     breed: 'Siamese',
+    species: 'Cat',
     gender: 'Female',
     imageUrl:
       'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
@@ -155,6 +182,7 @@ export const allPets: PetProfile[] = [
     name: 'Shalow',
     age: '8 Years',
     breed: 'Yellow Lab',
+    species: 'Dog',
     gender: 'Male',
     imageUrl:
       'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1000&auto=format&fit=crop',
@@ -169,6 +197,7 @@ export const allPets: PetProfile[] = [
     name: 'Miko',
     age: '4 Months',
     breed: 'Tabby Kitten',
+    species: 'Cat',
     gender: 'Female',
     imageUrl:
       'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
@@ -183,6 +212,7 @@ export const allPets: PetProfile[] = [
     name: 'Ana',
     age: '3 Years',
     breed: 'Border Collie',
+    species: 'Dog',
     gender: 'Female',
     imageUrl:
       'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=1000&auto=format&fit=crop',
@@ -197,6 +227,7 @@ export const allPets: PetProfile[] = [
     name: 'Buster',
     age: '3 Months',
     breed: 'Beagle Mix',
+    species: 'Dog',
     gender: 'Male',
     imageUrl:
       'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1000&auto=format&fit=crop',
@@ -211,6 +242,7 @@ export const allPets: PetProfile[] = [
     name: 'Soro',
     age: '5 Years',
     breed: 'Siamese',
+    species: 'Cat',
     gender: 'Male',
     imageUrl:
       'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000&auto=format&fit=crop',
@@ -224,3 +256,55 @@ export const allPets: PetProfile[] = [
 
 export const getPetBySlug = (slug: string) =>
   allPets.find((pet) => pet.slug === slug);
+
+export const getAgeGroup = (age: string): AgeGroup => {
+  const monthsMatch = age.match(/(\d+)\s*Month/i);
+  if (monthsMatch) return 'puppy-kitten';
+
+  const yearsMatch = age.match(/(\d+)\s*Year/i);
+  if (yearsMatch) {
+    const years = Number.parseInt(yearsMatch[1], 10);
+    if (years <= 2) return 'young';
+    if (years <= 7) return 'adult';
+    return 'senior';
+  }
+
+  return 'adult';
+};
+
+export const getUniqueBreeds = (pets: PetProfile[] = allPets) =>
+  [...new Set(pets.map((pet) => pet.breed))].sort();
+
+export const filterPets = (
+  pets: PetProfile[],
+  filters: PetFiltersState
+): PetProfile[] => {
+  const query = filters.search.trim().toLowerCase();
+
+  return pets.filter((pet) => {
+    if (query) {
+      const matchesSearch =
+        pet.name.toLowerCase().includes(query) ||
+        pet.breed.toLowerCase().includes(query) ||
+        pet.location.toLowerCase().includes(query);
+
+      if (!matchesSearch) return false;
+    }
+
+    if (filters.species && pet.species !== filters.species) return false;
+    if (filters.ageGroup && getAgeGroup(pet.age) !== filters.ageGroup) return false;
+    if (filters.gender && pet.gender !== filters.gender) return false;
+    if (filters.breed && pet.breed !== filters.breed) return false;
+
+    return true;
+  });
+};
+
+export const hasActiveFilters = (filters: PetFiltersState) =>
+  Boolean(
+    filters.search.trim() ||
+      filters.species ||
+      filters.ageGroup ||
+      filters.gender ||
+      filters.breed
+  );

@@ -6,6 +6,7 @@ import { PetCard } from '@/components/pets';
 const Residents = () => {
   const pets = [
     {
+      slug: 'cooper',
       name: 'Cooper',
       age: '2 Years',
       breed: 'Golden Retriever',
@@ -13,6 +14,7 @@ const Residents = () => {
       tags: [{ label: 'Healthy', color: 'green' as const }],
     },
     {
+      slug: 'luna',
       name: 'Luna',
       age: '1 Year',
       breed: 'Tabby Cat',
@@ -20,6 +22,7 @@ const Residents = () => {
       tags: [{ label: 'Friendly', color: 'blue' as const }],
     },
     {
+      slug: 'buster',
       name: 'Buster',
       age: '4 Years',
       breed: 'Beagle',
